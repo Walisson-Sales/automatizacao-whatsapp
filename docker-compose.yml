@@ -1,0 +1,63 @@
+services:
+  n8n:
+    image: n8nio/n8n # Imagem do n8n
+    container_name: n8n
+    restart: always 
+    ports:
+      - "5678:5678"
+    volumes:
+      - ~/.n8n:/home/node/.n8n
+    env_file:
+    - .env
+    environment:
+      - N8N_BASIC_AUTH_ACTIVE=true
+      # As seguintes informações devem ser configuradas no arquivo .env
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER} 
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
+
+    networks:
+      - automacao-whatsapp
+
+  evolution-api:
+      image: atendai/evolution-api:v2.1.1
+      container_name: evolution-api
+      restart: always
+      ports:
+        - "8080:8080"
+      env_file:
+      - .env
+      environment:
+        - DATABASE_PROVIDER=postgresql
+        - DATABASE_CONNECTION_URI=postgresql://postgres:senha@db:5432/evolution
+        - DB_HOST=db
+        - DB_PORT=5432
+        - DB_DATABASE=evolution
+        - DB_USER=postgres
+        - DB_PASSWORD=senha
+        - CONFIG_SESSION_NAME=projeto-ia
+        - CONFIG_START_ALL_SESSIONS=true
+        - CONFIG_WEBHOOK_URL=http://n8n:5678/webhook
+        - CONFIG_WEBHOOK_GLOBAL_URL=http://n8n:5678/global-webhook
+      depends_on:
+        - db
+      networks:
+        - automacao-whatsapp
+  db:
+    image: postgres:13
+    container_name: evolution-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: senha
+      POSTGRES_DB: evolution
+    volumes:
+      - ~/.evolution-db:/var/lib/postgresql/data
+    networks:
+      - automacao-whatsapp
+
+volumes:
+  db_data:
+
+networks:
+  automacao-whatsapp:
+    driver: bridge

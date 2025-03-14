@@ -1,0 +1,23 @@
+# Arquivos sensíveis
+.env
+.env.local
+.env.production
+.env.development
+
+# Dados temporários e logs
+*.log
+*.pid
+tmp/
+cache/
+node_modules/
+dist/
+
+# Banco de dados e volumes do Docker
+volumes/
+*.db
+*.sqlite
+*.sql
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
