@@ -38,8 +38,21 @@ services:
         - CONFIG_START_ALL_SESSIONS=true
         - CONFIG_WEBHOOK_URL=http://n8n:5678/webhook
         - CONFIG_WEBHOOK_GLOBAL_URL=http://n8n:5678/global-webhook
+        #Configuração do redis:
+        - CACHE_REDIS_ENABLED=true
+        - CACHE_REDIS_URI=redis://redis:6379/1
+        - CACHE_REDIS_PREFIX_KEY=evolution_v2
+        #Configuração do redis:
+        - DATABASE_SAVE_DATA_INSTANCE=true
+        - DATABASE_SAVE_DATA_NEW_MESSAGE=true
+        - DATABASE_SAVE_MESSAGE_UPDATE=true
+        - DATABASE_SAVE_DATA_CONTACTS=true
+        - DATABASE_SAVE_DATA_CHATS=true
+        - DATABASE_SAVE_DATA_LABELS=true
+        - DATABASE_SAVE_DATA_HISTORIC=true
       depends_on:
         - db
+        - redis
       networks:
         - automacao-whatsapp
   db:
@@ -54,10 +67,17 @@ services:
       - ~/.evolution-db:/var/lib/postgresql/data
     networks:
       - automacao-whatsapp
-
+  redis:
+    image: redis:latest
+    container_name: evolution-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - automacao-whatsapp
 volumes:
   db_data:
-
+  
 networks:
   automacao-whatsapp:
     driver: bridge
