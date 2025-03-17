@@ -50,6 +50,9 @@ services:
         - DATABASE_SAVE_DATA_CHATS=true
         - DATABASE_SAVE_DATA_LABELS=true
         - DATABASE_SAVE_DATA_HISTORIC=true
+        #configuração do webhook do n8n
+        - CONFIG_WEBHOOK_URL=http://n8n:5678/webhook/receber-mensagem
+        - CONFIG_WEBHOOK_GLOBAL_URL=http://n8n:5678/webhook/receber-mensagem
       depends_on:
         - db
         - redis
