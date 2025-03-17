@@ -54,13 +54,13 @@ Antes de começar, certifique-se de ter:
     - Iniciar o n8n na porta `5678`.
 
 ### 4. Configuração da Evolution API
-- Acesse o painel manager da Evolution API atráves de `[localhost:8080/manager](http://localhost:8080/manager)` (padrão)
+- Acesse o painel manager da Evolution API atráves de `http://localhost:8080/manager` (padrão)
 - Entre com as credenciais que você configurou no arquivo `.env` (token e URL do servidor).
 - Adicione uma nova instância, click no símbolo de configuraçõe, em seguida, gere e escaneie o qr code com seu telefone.
 - Em **"Events/Webhook"** você poderar abilitar e configurar o seu webhook.
 
 ### 5. Configuração do n8n
-- Acesse o n8n através do `[localhost:5678](http://localhost:5678)`. (padrão)
+- Acesse o n8n através do `http://localhost:5678`. (padrão)
 - Crie a sua conta no n8n.
 
 ---
