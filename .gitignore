@@ -4,6 +4,7 @@
 .env.production
 .env.development
 
+
 # Dados temporários e logs
 *.log
 *.pid
@@ -21,3 +22,6 @@ volumes/
 # Arquivos do sistema operacional
 .DS_Store
 Thumbs.db
+
+#outros
+chaves-api-ia.txt

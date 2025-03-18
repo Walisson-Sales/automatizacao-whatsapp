@@ -3,3 +3,7 @@ N8N_BASIC_AUTH_USER=seu_email@exemplo.com
 N8N_BASIC_AUTH_PASSWORD=sua_senha_segura
 <!-- Configurações do evolution-api -->
 AUTHENTICATION_API_KEY=sua_API_Key_Global
+<!-- configuração do banco de dados redis -->
+N8N_REDIS_HOST=redis 
+N8N_REDIS_PORT=6379
+REDIS_PASSWORD=senha_do_redis

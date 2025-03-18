@@ -14,7 +14,26 @@ services:
       # As seguintes informações devem ser configuradas no arquivo .env
       - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER} 
       - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
-
+      # Configuração do banco de dados redis para o n8n:
+      - N8N_REDIS_HOST=redis
+      - N8N_REDIS_PORT=6379
+      - N8N_REDIS_PASSWORD=${REDIS_PASSWORD}  # Passa a senha para o n8n
+    depends_on:
+      - redis
+    networks:
+      - automacao-whatsapp
+      
+  redis:
+    image: redis:latest
+    container_name: n8n-redis
+    restart: always
+    command: ["redis-server", "--requirepass", "${REDIS_PASSWORD}"] # Senha do redis que deve ser configurada no arquivo .env
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    env_file:
+      - .env
     networks:
       - automacao-whatsapp
 
@@ -40,7 +59,7 @@ services:
         - CONFIG_WEBHOOK_GLOBAL_URL=http://n8n:5678/global-webhook
         #Configuração do redis:
         - CACHE_REDIS_ENABLED=true
-        - CACHE_REDIS_URI=redis://redis:6379/1
+        - CACHE_REDIS_URI=redis://n8n-redis:6379/1
         - CACHE_REDIS_PREFIX_KEY=evolution_v2
         #Configuração do redis:
         - DATABASE_SAVE_DATA_INSTANCE=true
@@ -70,17 +89,13 @@ services:
       - ~/.evolution-db:/var/lib/postgresql/data
     networks:
       - automacao-whatsapp
-  redis:
-    image: redis:latest
-    container_name: evolution-redis
-    restart: always
-    ports:
-      - "6379:6379"
-    networks:
-      - automacao-whatsapp
+
 volumes:
   db_data:
-  
+    driver: local
+  redis_data:
+    driver: local
+
 networks:
   automacao-whatsapp:
     driver: bridge
