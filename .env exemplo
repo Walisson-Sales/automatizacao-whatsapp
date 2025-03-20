@@ -7,3 +7,7 @@ AUTHENTICATION_API_KEY=sua_API_Key_Global
 N8N_REDIS_HOST=redis 
 N8N_REDIS_PORT=6379
 REDIS_PASSWORD=senha_do_redis
+<!-- configuração do cache redis -->
+CACHE_REDIS_ENABLED=true
+CACHE_REDIS_URI=redis://:senha_do_redis@redis:6379/0
+CACHE_REDIS_PREFIX_KEY=evolution_v2

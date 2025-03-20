@@ -20,6 +20,7 @@ services:
       - N8N_REDIS_PASSWORD=${REDIS_PASSWORD}  # Passa a senha para o n8n
     depends_on:
       - redis
+      - evolution-api
     networks:
       - automacao-whatsapp
       
@@ -53,10 +54,12 @@ services:
         - DB_DATABASE=evolution
         - DB_USER=postgres
         - DB_PASSWORD=senha
-        - CONFIG_SESSION_NAME=projeto-ia
+        - CONFIG_SESSION_NAME=Walisson
         - CONFIG_START_ALL_SESSIONS=true
         - CONFIG_WEBHOOK_URL=http://n8n:5678/webhook
         - CONFIG_WEBHOOK_GLOBAL_URL=http://n8n:5678/global-webhook
+        - HOST=0.0.0.0
+        - DATABASE_PROVIDER=postgresql
         #Configuração do redis:
         - CACHE_REDIS_ENABLED=true
         - CACHE_REDIS_URI=redis://n8n-redis:6379/1
@@ -69,6 +72,10 @@ services:
         - DATABASE_SAVE_DATA_CHATS=true
         - DATABASE_SAVE_DATA_LABELS=true
         - DATABASE_SAVE_DATA_HISTORIC=true
+        #configuração do cashe do redis
+        - CACHE_REDIS_ENABLED=true
+        - CACHE_REDIS_URI=redis://:${REDIS_PASSWORD}@redis:6379/0
+        - CACHE_REDIS_PREFIX_KEY=evolution_v2
         #configuração do webhook do n8n
         - CONFIG_WEBHOOK_URL=http://n8n:5678/webhook/receber-mensagem
         - CONFIG_WEBHOOK_GLOBAL_URL=http://n8n:5678/webhook/receber-mensagem
