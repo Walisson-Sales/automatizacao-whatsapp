@@ -1,7 +1,7 @@
 <h1 align="center">Integração do Evolution API com n8n</h1>
 
 <p align="center">
-  <!--<img src="https://img.shields.io/badge/Status-Concluído-brightgreen" alt="Status do Projeto">-->
+  <img src="https://img.shields.io/badge/Status-Concluído-brightgreen" alt="Status do Projeto">
   <img src="https://img.shields.io/badge/Plataforma-n8n-blue" alt="Plataforma">
   <img src="https://img.shields.io/badge/API-Evolution%20API-orange" alt="API">
 </p>
@@ -79,14 +79,27 @@ Antes de começar, certifique-se de ter:
 
 ## 📊 Status do Projeto
 
-✅ **Integração Básica Concluída**  
-- Docker, Evolution API e n8n estão configurados e funcionando.  
-- Comunicação entre os serviços está estabelecida.  
+✅ **Funcionalidades Atuais**
+- Docker, Evolution API e n8n estão configurados e funcionando.
+- Comunicação entre os serviços está estabelecida.
+- Envio/recebimento de textos via WhatsApp com respostas em tempo real.
 
-⚠️ **Próximos Passos (Opcionais)**  
-- Configurar workflows no n8n para automações específicas.  
+⚠️ **Em Desenvolvimento**
 - Testar cenários avançados de envio/recebimento de mensagens.  
 - Adicionar exemplos de workflows na documentação.
+-Suporte a Mídias:
+  -Identificação de áudios, imagens e figurinhas.
+  -Armazenamento em cloud ou sistema local.
+-Aprimoramento da IA:
+  -Respostas contextualizadas com histórico de conversas.
+  -Filtragem de conteúdo sensível.
+-Monitoramento: Dashboard para acompanhamento de métricas e logs.
+
+---
+
+## 🛠️ Exemplo de Fluxo  
+![Workflow no n8n](./imagens/fluxo%20basico%20no%20n8n.png)  
+*Fluxo atual: Mensagem recebida → IA processa → Resposta enviada via Evolution API.*  
 
 ---
 
